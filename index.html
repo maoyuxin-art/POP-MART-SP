@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f8e6cd" />
+    <title>温度系列 · 刮一刮遇见今日温度</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app" id="app">
+      <section class="screen welcome-screen is-active" id="welcomeScreen" aria-labelledby="welcomeTitle">
+        <img class="welcome-art" src="./assets/welcome-cover.jpg" alt="温度系列刮一刮遇见你的今日温度活动封面" />
+        <button class="welcome-cover-button" id="welcomeCoverButton" type="button" aria-label="点击活动封面进入刮刮乐"></button>
+        <div class="welcome-wash"></div>
+        <header class="welcome-header">
+          <span class="brand">POP MART</span>
+          <span class="series">温度系列 <small>TEMPERATURE SERIES</small></span>
+        </header>
+        <div class="welcome-content">
+          <p class="eyebrow">6 款治愈角色 · 等你解锁</p>
+          <h1 class="welcome-title" id="welcomeTitle" aria-label="刮一刮！遇见你的今日温度">
+            <span class="title-row title-row-main">
+              <span class="title-char title-char-a">刮</span>
+              <span class="title-char title-char-b">一</span>
+              <span class="title-char title-char-c">刮</span>
+              <span class="title-char title-char-d">！</span>
+            </span>
+            <span class="title-row title-row-small">
+              <span class="title-char">遇</span>
+              <span class="title-char">见</span>
+              <span class="title-char">你</span>
+              <span class="title-char">的</span>
+            </span>
+            <span class="title-row title-row-color">
+              <span class="title-char title-today">今</span>
+              <span class="title-char title-today">日</span>
+              <span class="title-char title-warm">温</span>
+              <span class="title-char title-degree">度</span>
+            </span>
+          </h1>
+          <p class="welcome-copy">
+            <span>动态草 · 糖葫芦 · 书本</span>
+            <span>花朵 · 森林 · 星星</span>
+          </p>
+        </div>
+        <div class="welcome-bottom">
+          <div class="collect-note"><span>6</span> 款温度角色 · 等你发现</div>
+          <button class="primary-button start-button" id="startButton" type="button">
+            <span>点击开始刮草</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M7 12h10m-4-4 4 4-4 4" />
+            </svg>
+          </button>
+          <p class="tiny-note">轻轻滑动屏幕，刮开藏在草地里的小惊喜</p>
+        </div>
+      </section>
+
+      <section class="screen game-screen" id="gameScreen" aria-labelledby="stageTitle">
+        <img class="scene-image" id="sceneImage" src="./assets/01-breeze.jpg" alt="" />
+        <div class="scene-shade"></div>
+        <button class="found-card" id="foundCard" type="button" aria-label="点击解锁角色卡片" disabled>
+          <div class="found-card-number" id="foundNumber">01</div>
+          <img id="foundImage" src="./assets/01-breeze.jpg" alt="" />
+          <div class="found-card-copy">
+            <span id="foundLabel">微风起</span>
+            <small>点击唤醒角色</small>
+          </div>
+        </button>
+        <canvas class="scratch-canvas" id="scratchCanvas" aria-label="用手指在屏幕上滑动，刮开草地寻找角色"></canvas>
+
+        <header class="game-header">
+          <div class="stage-progress">
+            <span class="stage-counter" id="stageCounter">01 / 06</span>
+            <div class="progress-track" aria-label="解锁进度">
+              <span id="progressFill"></span>
+            </div>
+          </div>
+          <button class="icon-button" id="soundButton" type="button" aria-label="关闭背景音乐" aria-pressed="true">
+            <svg class="sound-on" aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M9 18V5l10-2v13" />
+              <circle cx="6" cy="18" r="3" />
+              <circle cx="16" cy="16" r="3" />
+            </svg>
+            <svg class="sound-off" aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M7 17 17 7M9 7v8m0-8 10-2v8" />
+              <circle cx="6" cy="18" r="3" />
+              <circle cx="16" cy="16" r="3" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="stage-copy">
+          <p class="eyebrow">第 <span id="stageIndex">01</span> 关 · <span id="coverName">风吹草地</span></p>
+          <h2 id="stageTitle">有一份温柔<br />藏在草丛里</h2>
+          <p id="stageHint">用手指轻轻刮开会摇摆的草地</p>
+        </div>
+
+        <div class="scratch-meter" id="scratchMeter">
+          <span class="scratch-meter-label" id="scratchMeterLabel">刮开动态草看看</span>
+          <span class="scratch-percent" id="scratchPercent">0%</span>
+        </div>
+
+        <div class="reveal-actions" id="revealActions">
+          <button class="primary-button reveal-button" id="revealButton" type="button">
+            <span>发现角色卡片 · 点击解锁</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="next-actions" id="nextActions">
+          <p>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6" /></svg>
+            左滑继续下一关
+          </p>
+          <button class="soft-button" id="nextButton" type="button">继续下一关</button>
+        </div>
+      </section>
+
+      <section class="screen final-screen" id="finalScreen" aria-labelledby="finalTitle">
+        <img class="final-art" src="./assets/overview.jpg" alt="温度系列角色集合海报" />
+        <div class="final-wash"></div>
+        <header class="welcome-header">
+          <span class="brand">POP MART</span>
+          <span class="series">温度系列 <small>TEMPERATURE SERIES</small></span>
+        </header>
+        <div class="final-content">
+          <p class="eyebrow">温度收集完成</p>
+          <h2 id="finalTitle">把今天的温柔<br /><strong>带回家吧</strong></h2>
+          <p>你已遇见全部 6 款治愈角色<br />隐藏款，也许就在下一盒</p>
+          <div class="character-dots" id="characterDots" aria-label="已收集六款角色"></div>
+          <div class="product-panel">
+            <div>
+              <small>温度系列盲盒</small>
+              <strong>限时发售中</strong>
+            </div>
+            <span>6 款 + 隐藏款</span>
+          </div>
+          <button class="primary-button buy-button" id="buyButton" type="button">
+            <span>立即购买盲盒</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M3 5h2l2.4 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 9H7m3 11h.01M17 20h.01" />
+            </svg>
+          </button>
+          <button class="text-button" id="replayButton" type="button">再体验一次</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="character-modal" id="characterModal" role="dialog" aria-modal="true" aria-labelledby="characterName" aria-hidden="true">
+      <div class="modal-scrim" id="modalScrim"></div>
+      <article class="character-poster" id="characterPoster">
+        <button class="close-button" id="closeModalButton" type="button" aria-label="关闭角色卡片">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17" /></svg>
+        </button>
+        <div class="poster-image-wrap">
+          <img class="poster-image" id="posterImage" src="./assets/01-breeze.jpg" alt="" />
+          <div class="poster-glow"></div>
+          <span class="spark spark-a"></span>
+          <span class="spark spark-b"></span>
+          <span class="spark spark-c"></span>
+          <button class="character-tap" id="characterTap" type="button" aria-label="点击角色播放动作"></button>
+        </div>
+        <div class="poster-copy">
+          <div class="poster-meta">
+            <span id="posterNumber">NO. 01</span>
+            <span>SKULLPANDA 温度系列</span>
+          </div>
+          <h3 id="characterName">微风起</h3>
+          <p class="healing-quote" id="healingQuote">风很轻，心也慢慢安静。</p>
+          <p class="action-note" id="actionNote">轻触角色，看 TA 朝你眨眨眼</p>
+          <button class="primary-button modal-next" id="modalNextButton" type="button">
+            <span>收下这份温度</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 12h10m-4-4 4 4-4 4" /></svg>
+          </button>
+        </div>
+      </article>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">正在为你打开购买页...</div>
+    <script src="./app.js"></script>
+  </body>
+</html>
