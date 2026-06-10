@@ -641,7 +641,8 @@ $("#nextButton").addEventListener("click", goNext);
 $("#replayButton").addEventListener("click", replay);
 $("#buyButton").addEventListener("click", () => {
   audio.playReveal();
-  showToast("购买入口已唤起 · 原型演示可替换为商城链接");
+  showToast("正在前往泡泡玛特官方商城...");
+  window.open("https://www.popmart.com.cn/home", "_blank");
 });
 
 elements.soundButton.addEventListener("click", () => {
